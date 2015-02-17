@@ -2,7 +2,7 @@
 #   To have an aerogear server
 #
 
-FROM dyn_jboss
+FROM jboss
 MAINTAINER kevin.moreau@dynamease.com
 
 RUN wget https://github.com/aerogear/aerogear-unifiedpush-server/releases/download/1.0.2/aerogear-unifiedpush-server-1.0.2-dist.tar.gz
@@ -21,14 +21,11 @@ RUN mv $AEROGEAR_FILES/aerogear-unifiedpush-server-1.0.2 $AEROGEAR_FILES/aerogea
 ENV DEPLOYMENTS /usr/local/share/jboss/standalone/deployments/
 ENV AEROGEAR_SERVER $AEROGEAR_FILES/aerogear-server
 
-COPY script/initAerogear.sh $AEROGEAR_FILES/initAerogear.sh
-COPY script/execAerogear.sh $AEROGEAR_FILES/execAerogear.sh
+RUN cp $AEROGEAR_SERVER/databases/unifiedpush-h2-ds.xml $DEPLOYMENTS/
 
-RUN chmod +x $AEROGEAR_FILES/initAerogear.sh
-RUN chmod +x $AEROGEAR_FILES/execAerogear.sh
+RUN mkdir -p $JBOSS_HOME/standalone/data/unifiedpush
 
-RUN $AEROGEAR_FILES/initAerogear.sh
+RUN cp $AEROGEAR_SERVER/servers/unifiedpush-auth-server.war $DEPLOYMENTS/
+RUN cp $AEROGEAR_SERVER/servers/unifiedpush-server-as7.war $DEPLOYMENTS/
 
-RUN rm -rf /usr/local/share/jboss/standalone/configuration/standalone_xml_history/current
-
-ENTRYPOINT $AEROGEAR_FILES/execAerogear.sh
+CMD ["/usr/local/share/jboss/bin/standalone.sh","-b","0.0.0.0"]

@@ -15,8 +15,6 @@ RUN unzip jboss-as-7.1.1.Final.zip && mv jboss-as-7.1.1.Final /usr/local/share/j
 
 RUN echo "JBOSS_HOME=/usr/local/share/jboss" >> /etc/bash.bashrc
 
-VOLUME /usr/local/share/jboss/
-
 EXPOSE 8080 8443 9990
 
 #CMD ["/usr/local/share/jboss/bin/standalone.sh","-b","0.0.0.0"]
