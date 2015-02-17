@@ -26,7 +26,7 @@ RUN cp $AEROGEAR_SERVER/databases/unifiedpush-h2-ds.xml $DEPLOYMENTS/
 RUN mkdir -p $JBOSS_HOME/standalone/data/unifiedpush
 
 COPY ./data/unifiedpush.h2.db $JBOSS_HOME/standalone/data/
-COPY ./unifiedpush-server-as7.war $AEROGEAR_SERVER/servers/unifiedpush-server-as7.war
+COPY ./ag-push.war $AEROGEAR_SERVER/servers/unifiedpush-server-as7.war
 
 RUN cp $AEROGEAR_SERVER/servers/unifiedpush-auth-server.war $DEPLOYMENTS/
 RUN cp $AEROGEAR_SERVER/servers/unifiedpush-server-as7.war $DEPLOYMENTS/
