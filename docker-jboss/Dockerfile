@@ -7,14 +7,23 @@ MAINTAINER kevin.moreau@dynamease.com
 
 USER root
 
-RUN sudo apt-get update && apt-get install -y wget curl unzip openjdk-7-jdk
+### Initiate all version ###
+ENV JDK_VERSION 7
+ENV JBOSS_VERSION as-7.1.1.Final
+ENV JBOSS_VERSION_NUMBER 7.1
 
-RUN curl -L  http://download.jboss.org/jbossas/7.1/jboss-as-7.1.1.Final/jboss-as-7.1.1.Final.zip -o jboss-as-7.1.1.Final.zip 
+### Installation of some utils libraries ###
+RUN sudo apt-get update && apt-get install -y curl unzip openjdk-$JDK_VERSION-jdk
 
-RUN unzip jboss-as-7.1.1.Final.zip && mv jboss-as-7.1.1.Final /usr/local/share/jboss
+### Get the jboss server ###
+RUN curl -L  http://download.jboss.org/jbossas/$JBOSS_VERSION_NUMBER/jboss-$JBOSS_VERSION/jboss-$JBOSS_VERSION.zip -o jboss-$JBOSS_VERSION.zip 
 
-RUN echo "JBOSS_HOME=/usr/local/share/jboss" >> /etc/bash.bashrc
 
-EXPOSE 8080 8443 9990
+### Install the Jboss Server ###
+RUN unzip jboss-$JBOSS_VERSION.zip && rm jboss-$JBOSS_VERSION.zip && mv jboss-$JBOSS_VERSION /usr/local/share/jboss
 
-#CMD ["/usr/local/share/jboss/bin/standalone.sh","-b","0.0.0.0"]
+### Set the environment variable JBOSS_HOME ###
+ENV JBOSS_HOME /usr/local/share/jboss
+
+### Open the port 8080 for the jboss server access ###
+EXPOSE 8080 
