@@ -23,12 +23,17 @@ ENV AEROGEAR_SERVER $AEROGEAR_FILES/aerogear-server
 
 RUN cp $AEROGEAR_SERVER/databases/unifiedpush-h2-ds.xml $DEPLOYMENTS/
 
-RUN mkdir -p $JBOSS_HOME/standalone/data/unifiedpush
+#RUN mkdir -p $JBOSS_HOME/standalone/data/unifiedpush
 
-COPY ./data/unifiedpush.h2.db $JBOSS_HOME/standalone/data/
+
+COPY ./data $JBOSS_HOME/standalone/data
+#COPY ./data/unifiedpush.h2.db $JBOSS_HOME/standalone/data/
+#COPY ./data/unifiedpush.lock.db $JBOSS_HOME/standalone/data/
 COPY ./ag-push.war $AEROGEAR_SERVER/servers/unifiedpush-server-as7.war
 
 RUN cp $AEROGEAR_SERVER/servers/unifiedpush-auth-server.war $DEPLOYMENTS/
 RUN cp $AEROGEAR_SERVER/servers/unifiedpush-server-as7.war $DEPLOYMENTS/
+
+VOLUME $JBOSS_HOME/standalone/data
 
 CMD ["/usr/local/share/jboss/bin/standalone.sh","-b","0.0.0.0"]
