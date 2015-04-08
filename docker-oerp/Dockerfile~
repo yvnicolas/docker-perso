@@ -34,7 +34,8 @@ COPY init.sh /init.sh
 COPY config-70 /
 
 EXPOSE 8069
-RUN adduser --home=/home/dynamease --group dynamease
-RUN echo dynamease:test | chpasswd
 
-#ENTRYPOINT ["./init.sh"]
+RUN adduser dynamease --disabled-password
+RUN echo "dynamease:fontenelles" | chpasswd
+
+CMD ["./init.sh"]

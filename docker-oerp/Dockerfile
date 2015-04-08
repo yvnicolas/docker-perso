@@ -35,4 +35,7 @@ COPY config-70 /
 
 EXPOSE 8069
 
-#ENTRYPOINT ["./init.sh"]
+RUN adduser dynamease --disabled-password
+RUN echo "dynamease:fontenelles" | chpasswd
+
+RUN ./init.sh

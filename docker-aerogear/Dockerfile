@@ -5,6 +5,8 @@
 FROM jboss
 MAINTAINER kevin.moreau@dynamease.com
 
+RUN apt-get install -y wget
+
 RUN wget https://github.com/aerogear/aerogear-unifiedpush-server/releases/download/1.0.2/aerogear-unifiedpush-server-1.0.2-dist.tar.gz
 
 ENV AEROGEAR_FILES /usr/local/share/aerogear
