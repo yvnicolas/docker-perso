@@ -31,11 +31,16 @@ python-webdav python-werkzeug python-xlwt python-yaml python-zsi
 
 
 COPY init.sh /init.sh
+COPY init.sql /init.sql
 COPY config-70 /
 
 EXPOSE 8069
 
-RUN adduser dynamease --disabled-password
-RUN echo "dynamease:fontenelles" | chpasswd
+RUN adduser openerp --disabled-password
+RUN echo "openerp:erppass" | chpasswd
 
 RUN ./init.sh
+
+COPY startup.sh /startup.sh
+
+CMD /startup.sh

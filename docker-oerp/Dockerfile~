@@ -35,7 +35,11 @@ COPY config-70 /
 
 EXPOSE 8069
 
-RUN adduser dynamease --disabled-password
-RUN echo "dynamease:fontenelles" | chpasswd
+RUN adduser openerp --disabled-password
+RUN echo "openerp:erppass" | chpasswd
 
-CMD ["./init.sh"]
+RUN ./init.sh
+
+COPY startup.sh /startup.sh
+
+CMD /startup.sh

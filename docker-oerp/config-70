@@ -1,9 +1,9 @@
 [options]
 addons_path = ../addons,../web/addons,../server-env-tools,
-admin_passwd = fontenelles
+admin_passwd = erppass
 csv_internal_sep = ,
 db_maxconn = 64
-db_user = dynamease
+db_user = openerp
 dbfilter = .*
 email_from = False
 limit_memory_hard = 805306368
