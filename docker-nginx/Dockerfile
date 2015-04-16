@@ -17,4 +17,4 @@ EXPOSE 80
 
 COPY ./initds.sh /usr/local/sbin/initds.sh
 
-#ENTRYPOINT ["initds.sh"]
+ENTRYPOINT ["initds.sh"]
