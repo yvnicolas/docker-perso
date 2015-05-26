@@ -1,6 +1,6 @@
-upstream myapp1 {
-        server localhost:8069;
-        server localhost:8080;
+upstream dynamease {
+        server dynTomcat;
+        server 5.135.254.51 backup;
 }
 
 server {
@@ -11,10 +11,19 @@ server {
         index index.html index.htm;
 
         # Make site accessible from http://localhost/
-        server_name localhost;
+        server_name 5.135.254.49;
 
         location / {
-                proxy_pass http://myapp1;
+                proxy_pass http://dynamease/webapp/;
         }
+        location ^~ /appless/ {
+                proxy_pass http://dynamease;
+        }
+        location ^~ /webapp/ {
+                proxy_pass http://dynamease;
+        }
+	    location ^~ /jsonRq/ {
+		    proxy_pass http://dynamease;
+	    }
 }
 

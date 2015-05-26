@@ -12,12 +12,12 @@ ENABLED="$NGINX_PATH/sites-enabled"
 
 rm $ENABLED/*
 
+echo "Working with the configuration file :"
+
 for file in $(ls $AVAILABLE); do
-    echo $file
+	echo $file
     ln -s $AVAILABLE/$file $ENABLED/$file
 done
-
-ls $ENABLED
 
 service nginx restart
 
