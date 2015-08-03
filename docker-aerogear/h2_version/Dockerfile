@@ -2,7 +2,8 @@
 #   To have an aerogear server
 #
 
-FROM jboss
+FROM aerogear/wildfly
+
 MAINTAINER kevin.moreau@dynamease.com
 
 ENV AEROGEAR_FILES /usr/local/share/aerogear
