@@ -39,4 +39,4 @@ RUN cp $AEROGEAR_SERVER/servers/unifiedpush-server-as7.war $DEPLOYMENTS/
 
 VOLUME $JBOSS_HOME/standalone/data
 
-CMD ["/usr/local/share/jboss/bin/standalone.sh","-b","0.0.0.0"]
+
